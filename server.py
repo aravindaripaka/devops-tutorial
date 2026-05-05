@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-import os, time
+import time
 
 app = Flask(__name__)
 START_TIME = time.time()
@@ -15,7 +15,8 @@ def health():
 
 @app.route("/error")
 def error():
-    return "1"
-    
+    raise Exception("simulated error")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000)
+
