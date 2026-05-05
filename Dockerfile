@@ -7,14 +7,14 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy app code
-COPY app.py .
+COPY server.py .
 
 # Run as non-root user (security best practice)
 RUN useradd -m appuser
 USER appuser
 
-EXPOSE 3000
+EXPOSE 5000
 
 # Use gunicorn for production (not Flask's dev server)
 CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:5000", \
-     "--workers", "2", "--timeout", "30", "app:app"]
+     "--workers", "2", "--timeout", "30", "server:app"]
